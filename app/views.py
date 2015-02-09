@@ -12,9 +12,7 @@ leagueAPI = os.environ['LEAGUE_API']
 def main():
     toGet = request.values.get('Body', None)
 
-    return toGet
-
-    message = composeMessage(toGet)
+    message = str(composeMessage(toGet))
 
     resp = twilio.twiml.Response()
     resp.message(message)
@@ -24,7 +22,7 @@ def main():
 def composeMessage(summonerName):
     gameURL = "https://na.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/"
     leagueURL = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/"
-    summonerNameURL = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/"+summonerName
+    summonerNameURL = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/"+summonerName + "/"
 
     idQuery = {
                 "api_key": leagueAPI
@@ -32,4 +30,4 @@ def composeMessage(summonerName):
     response = requests.get(summonerNameURL, params = idQuery)
     idData = response.json()
 
-    return idData[summonerName]["id"]
+    return idData[summonerName.lower]["id"]
