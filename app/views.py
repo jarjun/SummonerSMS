@@ -9,6 +9,7 @@ leagueAPI = os.environ['LEAGUE_API']
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
+    return ""
     toGet = request.values.get('Body', None)
 
     message = composeMessage(toGet)
