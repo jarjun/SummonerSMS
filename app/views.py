@@ -20,14 +20,41 @@ def main():
     return str(resp)
 
 def composeMessage(summonerName):
-    gameURL = "https://na.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/"
-    leagueURL = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/"
     summonerNameURL = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/"+summonerName + "/"
 
-    idQuery = {
+    query = {
                 "api_key": leagueAPI
               }
-    response = requests.get(summonerNameURL, params = idQuery)
+    response = requests.get(summonerNameURL, params = query)
     idData = response.json()
 
-    return idData[summonerName.lower()]["id"]
+    id = idData[summonerName.lower()]["id"]
+
+    gameURL = "https://na.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/" + id + "/"
+
+    response = requests.get(gameURL, params = query)
+    gameData = response.json()
+
+    participantList = gameData["participants"]
+    infoList = []
+    for x in participantList:
+        infoList.append([x["summonerName"],x["teamId"], x["summonerId"]])
+        if x["summonerId"] == id:
+            team = x["teamId"]
+    opposingTeam =  []
+    for x in infoList:
+        if x[1] != team:
+            opposingTeam.append([x[0],x[2]])
+
+    finList = []
+
+    for x in opposingTeam:
+        leagueURL = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/" + x[1] + "/"
+        response = requests.get(leagueURL, params = query)
+        leagueData = response.json()
+        finList.append(x[0] + "-" + leagueData[x[1]]["tier"])
+
+    ret = ""
+    for x in finList:
+        ret += (x + "\n")
+    return ret
