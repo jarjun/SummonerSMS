@@ -3,13 +3,13 @@ from app import app
 import requests
 from twilio.rest import TwilioRestClient
 import twilio.twiml
+from os import *
 
 
 leagueAPI = os.environ['LEAGUE_API']
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    return ""
     toGet = request.values.get('Body', None)
 
     message = composeMessage(toGet)
