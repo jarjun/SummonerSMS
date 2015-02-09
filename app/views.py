@@ -3,7 +3,7 @@ from app import app
 import requests
 from twilio.rest import TwilioRestClient
 import twilio.twiml
-from os import *
+import os
 
 
 leagueAPI = os.environ['LEAGUE_API']
