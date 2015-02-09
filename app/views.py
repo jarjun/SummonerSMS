@@ -2,11 +2,10 @@ from flask import render_template, Flask, request, redirect, flash
 from app import app
 import requests
 from twilio.rest import TwilioRestClient
-from config import *
 import twilio.twiml
 
-client = TwilioRestClient(config.account_sid, config.auth_token)
 
+leagueAPI = os.environ['LEAGUE_API']
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -25,7 +24,7 @@ def composeMessage(summonerName):
     summonerNameURL = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/"+summonerName
 
     idQuery = {
-                "api_key": config.leagueAPI
+                "api_key": leagueAPI
               }
     response = requests.get(summonerNameURL, params = idQuery)
     idData = response.json()
