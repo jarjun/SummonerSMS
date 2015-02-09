@@ -30,4 +30,4 @@ def composeMessage(summonerName):
     response = requests.get(summonerNameURL, params = idQuery)
     idData = response.json()
 
-    return idData[summonerName.lower]["id"]
+    return idData[summonerName.lower()]["id"]
