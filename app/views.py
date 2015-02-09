@@ -12,6 +12,8 @@ leagueAPI = os.environ['LEAGUE_API']
 def main():
     toGet = request.values.get('Body', None)
 
+    return toGet
+
     message = composeMessage(toGet)
 
     resp = twilio.twiml.Response()
