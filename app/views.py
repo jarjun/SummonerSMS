@@ -62,7 +62,7 @@ def composeMessage(summonerName):
     except:
         return "Error Code 1"
     try:
-        leagueURL = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/" + str(opposingTeam[0][1]) + "," + str(opposingTeam[1][1]) + "," + str(opposingTeam[2][1]) + "," + str(opposingTeam[3][1]) + "," + str(opposingTeam[4][1]) + "/"
+        leagueURL = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/" + str(opposingTeam[0][1]) + "," + str(opposingTeam[1][1]) + "," + str(opposingTeam[2][1]) + "," + str(opposingTeam[3][1]) + "," + str(opposingTeam[4][1]) + "/" + "entry" + "/"
         response3 = requests.get(leagueURL, params = query)
         leagueData = response3.json()
     except:
@@ -71,7 +71,7 @@ def composeMessage(summonerName):
     try:
         for x in d:
             try:
-                finList.append(str(d[x]) + "-" + str(leagueData[x][0]["tier"]))
+                finList.append(str(d[x]) + "-" + str(leagueData[x][0]["tier"]) + " " + str(leagueData[x][0]["entries"][0]["division"]))
             except:
                 finList.append("UNRANKED")
         ret = ""
