@@ -73,7 +73,7 @@ def composeMessage(summonerName):
             try:
                 finList.append(str(d[x]) + "-" + str(leagueData[x][0]["tier"]) + " " + str(leagueData[x][0]["entries"][0]["division"]))
             except:
-                finList.append("UNRANKED")
+                finList.append(str(d[x]) + "-" + "UNRANKED")
         ret = ""
         for x in finList:
             ret += x
