@@ -90,7 +90,7 @@ def composeMessage(summonerName):
         record = response4.json()
         #ret += str(record)
         if record["success"] == True:
-            link = "http://na.op.gg/match/observer/id=" + gameID + "/"
+            link = "http://na.op.gg/match/observer/id=" + str(gameID) + "/"
             ret += link
         else:
             ret += "Recording Failure"
