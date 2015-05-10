@@ -44,6 +44,7 @@ def composeMessage(summonerName):
         response2 = requests.get(gameURL, params = query)
         gameData = response2.json()
         participantList = gameData["participants"]
+        gameID = gameData["gameId"]
         infoList = []
         for x in participantList:
             infoList.append([x["summonerName"],x["teamId"], x["summonerId"]])
@@ -84,7 +85,7 @@ def composeMessage(summonerName):
         return "Error Code 2"
 
     try:
-        recordingURL = "http://na.op.gg/summoner/ajax/requestRecording.json/gameId=" + str(id) + "/"
+        recordingURL = "http://na.op.gg/summoner/ajax/requestRecording.json/gameId=" + str(gameID) + "/"
         response4 = requests.get(recordingURL)
         record = response4.json()
         ret += record["callback"]
