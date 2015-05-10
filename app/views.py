@@ -10,12 +10,15 @@ leagueAPI = os.environ['LEAGUE_API']
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    toGet = request.values.get('Body', None)
+    try:
+        toGet = request.values.get('Body', None)
 
-    message = str(composeMessage(toGet))
+        message = str(composeMessage(toGet))
 
-    resp = twilio.twiml.Response()
-    resp.message(message)
+        resp = twilio.twiml.Response()
+        resp.message(message)
+    except:
+        return "Internal Service Error"
  
     return str(resp)
 
