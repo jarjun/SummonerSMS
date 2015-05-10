@@ -85,8 +85,8 @@ def composeMessage(summonerName):
 
     try:
         recordingURL = "http://na.op.gg/summoner/ajax/requestRecording.json/gameId=" + str(id) + "/"
-        response4 = requests.get(recordingURL, params = {})
-        record = response.json()
+        response4 = requests.get(recordingURL)
+        record = response4.json()
         ret += record
         if response["success"] == "true":
             ret += "Recording Successful"
