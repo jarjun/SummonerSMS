@@ -53,7 +53,6 @@ def composeMessage(summonerName):
     except:
         return "Not in game"
 
-
     try:
         d = {}
         for x in opposingTeam:
@@ -80,4 +79,14 @@ def composeMessage(summonerName):
             ret += "\n"
     except:
         return "Error Code 2"
+
+    try:
+        recordingURL = "http://na.op.gg/summoner/ajax/requestRecording.json/gameId=" + str(id) + "/"
+        response4 = requests.get(recordingURL)
+        record = response.json()
+        if response["success"] = "true":
+            ret += "Recording Successful"
+    except:
+        return ret + "Recording Failure"
+
     return ret
