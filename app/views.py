@@ -88,7 +88,7 @@ def composeMessage(summonerName):
         response4 = requests.get(recordingURL)
         record = response4.json()
         ret += record
-        if response["success"] == "true":
+        if record["success"] == "true":
             ret += "Recording Successful"
     except:
         ret += "Recording Failure"
